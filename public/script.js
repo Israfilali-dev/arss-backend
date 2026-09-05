@@ -689,7 +689,13 @@ function openItemModal(type, editId = null) {
   currentItemType = type;
   currentEditId = editId;
 
-  document.querySelectorAll("#itemForm > div[id^='itemFields']").forEach((el) => el.classList.add("hidden"));
+  // Hide AND disable every fieldset first — disabled inputs are excluded from
+  // FormData, which stops same-named fields (e.g. "title" in both Film and
+  // Service) from being submitted together as an array.
+  document.querySelectorAll("#itemForm > div[id^='itemFields']").forEach((el) => {
+    el.classList.add("hidden");
+    el.querySelectorAll("input, textarea, select").forEach((input) => (input.disabled = true));
+  });
   document.getElementById("itemPhotoField").classList.toggle("hidden", type === "service");
 
   const form = document.getElementById("itemForm");
@@ -697,7 +703,9 @@ function openItemModal(type, editId = null) {
   document.getElementById("itemImagePreview").style.backgroundImage = "";
 
   const fieldMap = { film: "itemFieldsFilm", team: "itemFieldsTeam", service: "itemFieldsService", testimonial: "itemFieldsTestimonial" };
-  document.getElementById(fieldMap[type]).classList.remove("hidden");
+  const activeFieldset = document.getElementById(fieldMap[type]);
+  activeFieldset.classList.remove("hidden");
+  activeFieldset.querySelectorAll("input, textarea, select").forEach((input) => (input.disabled = false));
 
   const titleMap = { film: "Film", team: "Team Member", service: "Service", testimonial: "Testimonial" };
   document.getElementById("itemModalTitle").textContent = (editId ? "Edit " : "Add ") + titleMap[type];
