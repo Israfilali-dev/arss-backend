@@ -16,96 +16,140 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased">
+<body class="custom-body antialiased">
 
 <!-- Background Film Grain Effect -->
 <div class="grain"></div>
 
-<!-- ============ NAVBAR ============ -->
-<header id="mainNav" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-5 md:px-10">
-    <div class="flex items-center justify-between h-20">
-      
-      <!-- LOGO Block -->
-      <a href="#home" class="flex items-center gap-3 shrink-0" id="logoSlot">
-        <span id="logoMark" class="flex items-center justify-center w-11 h-11 rounded-sm border border-[var(--gold-soft)] overflow-hidden shrink-0" style="background:linear-gradient(160deg,#1a1312,#0b0908);">
-          <span id="logoFallback" class="font-display text-lg tracking-wide" style="color:var(--gold);">A</span>
-          <img id="logoImg" src="" alt="ARSS Entertainment logo" class="hidden w-full h-full object-contain">
-        </span>
-        <span class="leading-tight">
-          <span class="block font-display text-xl tracking-wide text-[var(--cream)]">ARSS <span style="color:var(--crimson-bright);">ENTERTAINMENT</span></span>
-          <span id="navTagline" class="hidden sm:block text-[10px] tracking-[0.2em] text-[var(--muted)] uppercase">Where Emotion Turns Into Film</span>
-        </span>
-      </a>
+<!-- ============ NAVIGATION BAR SECTION (FLOATING) ============ -->
+<header id="mainNav" class="navbar-floating fixed top-0 left-0 right-0 z-40">
+  <div class="navbar-container max-w-7xl mx-auto flex items-center justify-between">
+    
+    <!-- LOGO & BRAND TITLE Block (FIXED JS CONNECTIONS) -->
+    <a href="#home" class="flex items-center shrink-0 brand-link" id="logoSlot">
+      <div class="nav-custom-logo-wrap">
+          <!-- Restored logoFallback for JS safety (Kept hidden so it doesn't break your new UI) -->
+          <span id="logoFallback" class="hidden font-display text-lg tracking-wide text-[var(--gold)]">A</span>
+          <img id="logoImg" src="ARSS ENTERTAINMENT.png" alt="ARSS Entertainment Logo" class="nav-custom-logo">
+      </div>
+      <div class="nav-brand-text-container flex flex-col">
+          <span class="nav-brand-title font-display">ARSS ENTERTAINMENT</span>
+          <!-- Restored navTagline ID so Admin panel can dynamically update it -->
+          <span id="navTagline" class="nav-brand-subtitle uppercase">Where Emotion Turns Into Film</span>
+      </div>
+    </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-9 text-sm">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#films" class="nav-link">Films</a>
-        <a href="#team" class="nav-link">Team</a>
-        <a href="#connect" class="nav-link">Connect Us</a>
-      </nav>
-
-      <a href="#connect" class="hidden md:inline-flex btn-primary text-sm px-5 py-2.5 rounded-sm">Start a Project</a>
-
-      <!-- Mobile Menu Button -->
-      <button id="mobileBtn" class="md:hidden text-[var(--cream)]" aria-label="Open menu">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
-    </div>
-  </div>
-  
-  <!-- Mobile Dropdown -->
-  <div id="mobileMenu" class="hidden md:hidden bg-[var(--panel)] border-t border-[var(--line)]">
-    <div class="flex flex-col px-6 py-4 gap-4 text-sm">
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden md:flex items-center desktop-nav-links">
       <a href="#home" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
       <a href="#films" class="nav-link">Films</a>
       <a href="#team" class="nav-link">Team</a>
-      <a href="#connect" class="nav-link">Connect Us</a>
+      <a href="#gallery" class="nav-link">Gallery</a>
+    </nav>
+
+    <!-- Authentication & Admin Actions -->
+    <div class="hidden md:flex items-center nav-actions">
+        <a href="admin.html" class="nav-admin-link">Admin Login</a>
+        <div class="nav-divider"></div>
+        <a href="#connect" class="btn-primary nav-enquiry-btn">Enquiry</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobileBtn" class="md:hidden mobile-menu-btn" aria-label="Open menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  
+  <!-- Mobile Dropdown Menu (Updated: Contact & Admin Only) -->
+  <div id="mobileMenu" class="hidden md:hidden mobile-dropdown">
+    <div class="flex flex-col mobile-nav-links">
+      <a href="admin.html" class="nav-admin-link">Admin Login</a>
+       <div class="mobile-nav-divider"></div>
+      <a href="#connect" class="btn-primary nav-enquiry-btn text-center">Enquiry</a>
     </div>
   </div>
 </header>
 
+<!-- ============ MOBILE BOTTOM NAVIGATION ============ -->
+<nav class="mobile-bottom-nav md:hidden fixed bottom-0 left-0 right-0 z-50">
+    <div class="bottom-nav-container flex justify-between items-center max-w-md mx-auto">
+        <!-- Home -->
+        <a href="#home" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Home</span>
+        </a>
+        <!-- About -->
+        <a href="#about" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span>About</span>
+        </a>
+        <!-- Films -->
+        <a href="#films" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+            <span>Films</span>
+        </a>
+        <!-- Team -->
+        <a href="#team" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Team</span>
+        </a>
+        <!-- Gallery -->
+        <a href="#gallery" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <span>Gallery</span>
+        </a>
+    </div>
+</nav>
+
 <!-- ============ HERO SECTION ============ -->
-<section id="home" class="relative overflow-hidden vignette" style="background:radial-gradient(ellipse 80% 60% at 70% 0%, #2a0d0e 0%, #0A0807 55%);">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 pt-36 pb-20 md:pt-44 md:pb-28 grid md:grid-cols-2 gap-14 items-center relative z-10">
+<section id="home" class="hero-section relative overflow-hidden vignette">
+  <div class="hero-container max-w-7xl mx-auto grid md:grid-cols-2 items-center relative z-10">
 
     <!-- Hero Content -->
-    <div>
-      <div class="sprocket-row mb-6 w-32">
+    <div class="hero-content">
+      <div class="sprocket-row">
         <span class="sprocket"></span><span class="sprocket"></span><span class="sprocket-line"></span>
       </div>
-      <h1 id="heroHeadline" class="font-display text-[2.6rem] leading-[1.08] sm:text-6xl sm:leading-[1.05] text-[var(--cream)]">
-        Where emotion<br>turns into <span style="color:var(--crimson-bright);">film.</span>
+      <h1 id="heroHeadline" class="font-display hero-headline">
+        Where emotion<br>turns into <span class="text-crimson-bright">film.</span>
       </h1>
-      <p id="heroSubheadline" class="mt-6 text-[var(--muted)] text-base sm:text-lg max-w-md">
+      <p id="heroSubheadline" class="hero-subheadline">
         ARSS Entertainment is a production house built on one belief — a story is only as strong as the feeling it leaves behind. We produce films that stay with an audience long after the credits roll.
       </p>
-      <div class="mt-9 flex flex-wrap gap-4">
-        <a id="heroCtaPrimary" href="#films" class="btn-primary px-7 py-3.5 rounded-sm text-sm tracking-wide">View Our Films</a>
-        <a id="heroCtaSecondary" href="#connect" class="btn-ghost px-7 py-3.5 rounded-sm text-sm tracking-wide">Connect With Us</a>
+      <div class="hero-buttons flex flex-wrap">
+        <a id="heroCtaPrimary" href="#films" class="btn-primary hero-btn">View Our Films</a>
+        <a id="heroCtaSecondary" href="#connect" class="btn-ghost hero-btn">Connect With Us</a>
       </div>
 
-      <div class="mt-14 flex gap-10">
-        <div><div class="font-display text-3xl text-[var(--cream)]" data-stat="films">12+</div><div class="text-xs uppercase tracking-widest text-[var(--muted)] mt-1">Productions</div></div>
-        <div><div class="font-display text-3xl text-[var(--cream)]" data-stat="years">8</div><div class="text-xs uppercase tracking-widest text-[var(--muted)] mt-1">Years</div></div>
-        <div><div class="font-display text-3xl text-[var(--cream)]" data-stat="awards">15</div><div class="text-xs uppercase tracking-widest text-[var(--muted)] mt-1">Awards</div></div>
+      <!-- Replace your EXISTING hero-stats div with this exactly, carefully check the closing tags -->
+      <div class="hero-stats flex flex-wrap">
+        <div>
+            <div class="stat-number" data-stat="films">12+</div>
+            <div class="stat-label uppercase">Productions</div>
+        </div>
+        <div>
+            <div class="stat-number" data-stat="years">8</div>
+            <div class="stat-label uppercase">Years</div>
+        </div>
+        <div>
+            <div class="stat-number" data-stat="awards">15</div>
+            <div class="stat-label uppercase">Awards</div>
+        </div>
       </div>
-    </div>
+    </div> <!-- CRITICAL: This closes the .hero-content div -->
 
     <!-- Hero Image & Animated Clapboard -->
     <div class="relative">
-      <div id="heroCollage" class="grid grid-cols-3 grid-rows-2 gap-2.5 rounded-sm overflow-hidden h-[300px] sm:h-[380px] md:h-[420px]">
+      <div id="heroCollage" class="hero-collage grid grid-cols-3 grid-rows-2 rounded-sm overflow-hidden">
         <div class="collage-tile col-span-2 row-span-2"></div>
         <div class="collage-tile"></div>
         <div class="collage-tile"></div>
       </div>
-      <div class="absolute inset-0 rounded-sm" style="background:linear-gradient(180deg, rgba(10,8,7,0) 40%, rgba(10,8,7,.75) 100%);"></div>
+      <div class="hero-gradient-overlay absolute inset-0 rounded-sm"></div>
 
       <!-- Clapboard SVG -->
-      <div class="absolute -bottom-8 -left-6 sm:-bottom-10 sm:-left-10 clap-stage">
+      <div class="clapboard-wrapper absolute clap-stage">
         <svg width="190" height="150" viewBox="0 0 190 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <linearGradient id="stripeBlack" x1="0" y1="0" x2="1" y2="0">
@@ -137,20 +181,20 @@
 </section>
 
 <!-- ============ ABOUT SECTION ============ -->
-<section id="about" class="relative py-24 md:py-32" style="background:var(--panel);">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 grid md:grid-cols-12 gap-14">
-    <div class="md:col-span-4">
-      <div class="heading-mark mb-5"></div>
-      <h2 class="font-display text-3xl sm:text-4xl text-[var(--cream)]" data-about="heading">The studio behind the story</h2>
+<section id="about" class="about-section relative">
+  <div class="section-container max-w-7xl mx-auto grid md:grid-cols-12">
+    <div class="md:col-span-4 about-heading-container">
+      <div class="heading-mark"></div>
+      <h2 class="font-display section-title" data-about="heading">The studio behind the story</h2>
     </div>
     <div class="md:col-span-8">
-      <p class="text-[var(--muted)] text-lg leading-relaxed" data-about="p1">
+      <p class="section-paragraph" data-about="p1">
         Founded on the idea that cinema should be felt before it is understood, ARSS Entertainment develops, finances and produces films across genres — from intimate dramas to large-canvas features. Every project starts with a single question: what will the audience carry home with them?
       </p>
-      <p class="text-[var(--muted)] text-lg leading-relaxed mt-5" data-about="p2">
+      <p class="section-paragraph paragraph-spacing" data-about="p2">
         We work closely with writers, directors and technicians who share that obsession with feeling, building productions that are disciplined on set and fearless in the edit. Our slate spans theatrical releases, streaming originals and short-format work.
       </p>
-      <div class="mt-10 sprocket-row">
+      <div class="sprocket-row about-sprocket">
         <span class="sprocket"></span><span class="sprocket-line"></span><span class="sprocket"></span>
       </div>
     </div>
@@ -158,157 +202,217 @@
 </section>
 
 <!-- ============ SERVICES SECTION ============ -->
-<section id="services" class="py-24 md:py-32 hidden">
-  <div class="max-w-7xl mx-auto px-5 md:px-10">
-    <div class="mb-14">
-      <div class="heading-mark mb-5"></div>
-      <h2 class="font-display text-3xl sm:text-4xl text-[var(--cream)]">What we do</h2>
+<section id="services" class="services-section hidden">
+  <div class="section-container max-w-7xl mx-auto">
+    <div class="section-header">
+      <div class="heading-mark"></div>
+      <h2 class="font-display section-title">What we do</h2>
     </div>
-    <div id="servicesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7"></div>
+    <div id="servicesGrid" class="services-grid grid sm:grid-cols-2 lg:grid-cols-3"></div>
+    
+    <!-- Functional Mobile More Button -->
+   <div class="mobile-more-btn-wrap hidden">
+        <a href="#" onclick="document.getElementById('servicesGrid').classList.toggle('expanded-grid'); this.innerText = document.getElementById('servicesGrid').classList.contains('expanded-grid') ? 'Show Less' : 'View More'; return false;" class="btn-ghost mobile-more-btn">View More</a>
+    </div>
   </div>
 </section>
 
 <!-- ============ FILMS SECTION ============ -->
-<section id="films" class="py-24 md:py-32">
-  <div class="max-w-7xl mx-auto px-5 md:px-10">
-    <div class="flex items-end justify-between mb-14 flex-wrap gap-4">
+<section id="films" class="films-section">
+  <div class="section-container max-w-7xl mx-auto">
+    <div class="films-header flex items-end justify-between flex-wrap">
       <div>
-        <div class="heading-mark mb-5"></div>
-        <h2 class="font-display text-3xl sm:text-4xl text-[var(--cream)]">Our films</h2>
+        <div class="heading-mark"></div>
+        <h2 class="font-display section-title">Our films</h2>
       </div>
-      <p class="text-[var(--muted)] max-w-sm text-sm">A selection from our production slate — theatrical features, streaming originals and short films.</p>
+      <p class="films-subtitle">A selection from our production slate — theatrical features, streaming originals and short films.</p>
     </div>
-    <div id="filmsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    <div id="filmsGrid" class="films-grid grid sm:grid-cols-2 lg:grid-cols-3"></div>
+    
+    <!-- Functional Mobile More Button -->
+    <div class="mobile-more-btn-wrap hidden">
+        <a href="#" onclick="document.getElementById('filmsGrid').classList.toggle('expanded-grid'); this.innerText = document.getElementById('filmsGrid').classList.contains('expanded-grid') ? 'Show Less' : 'View More'; return false;" class="btn-ghost mobile-more-btn">View More</a>
+    </div>
   </div>
 </section>
 
 <!-- ============ TEAM SECTION ============ -->
-<section id="team" class="py-24 md:py-32" style="background:var(--panel);">
-  <div class="max-w-7xl mx-auto px-5 md:px-10">
-    <div class="mb-14">
-      <div class="heading-mark mb-5"></div>
-      <h2 class="font-display text-3xl sm:text-4xl text-[var(--cream)]">The people behind the picture</h2>
+<section id="team" class="team-section">
+  <div class="section-container max-w-7xl mx-auto">
+    <div class="section-header">
+      <div class="heading-mark"></div>
+      <h2 class="font-display section-title">The people behind the picture</h2>
     </div>
-    <div id="teamGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7"></div>
+    <div id="teamGrid" class="team-grid grid sm:grid-cols-2 lg:grid-cols-4"></div>
+    
+    <!-- Functional Mobile More Button -->
+    <div class="mobile-more-btn-wrap hidden">
+        <a href="#" onclick="document.getElementById('teamGrid').classList.toggle('expanded-grid'); this.innerText = document.getElementById('teamGrid').classList.contains('expanded-grid') ? 'Show Less' : 'View More'; return false;" class="btn-ghost mobile-more-btn">View More</a>
+    </div>
   </div>
 </section>
 
 <!-- ============ GALLERY SECTION ============ -->
-<section id="gallery" class="py-24 md:py-32 hidden">
-  <div class="max-w-7xl mx-auto px-5 md:px-10">
-    <div class="mb-14">
-      <div class="heading-mark mb-5"></div>
-      <h2 class="font-display text-3xl sm:text-4xl text-[var(--cream)]">On set</h2>
+<section id="gallery" class="gallery-section hidden">
+  <div class="section-container max-w-7xl mx-auto">
+    <div class="section-header">
+      <div class="heading-mark"></div>
+      <h2 class="font-display section-title">On set</h2>
     </div>
-    <div id="galleryGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+    <div id="galleryGrid" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"></div>
+    
+    <!-- Functional Mobile More Button -->
+    <div class="mobile-more-btn-wrap hidden">
+        <a href="#" onclick="document.getElementById('galleryGrid').classList.toggle('expanded-grid'); this.innerText = document.getElementById('galleryGrid').classList.contains('expanded-grid') ? 'Show Less' : 'View More'; return false;" class="btn-ghost mobile-more-btn">View More</a>
+    </div>
   </div>
 </section>
 
 <!-- ============ TESTIMONIALS SECTION ============ -->
-<section id="testimonials" class="py-24 md:py-32 hidden" style="background:var(--panel);">
-  <div class="max-w-7xl mx-auto px-5 md:px-10">
-    <div class="mb-14">
-      <div class="heading-mark mb-5"></div>
-      <h2 class="font-display text-3xl sm:text-4xl text-[var(--cream)]">What people say</h2>
+<section id="testimonials" class="testimonials-section hidden">
+  <div class="section-container max-w-7xl mx-auto">
+    <div class="section-header">
+      <div class="heading-mark"></div>
+      <h2 class="font-display section-title">What people say</h2>
     </div>
-    <div id="testimonialsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7"></div>
+    <div id="testimonialsGrid" class="testimonials-grid grid sm:grid-cols-2 lg:grid-cols-3"></div>
+    
+    <!-- Functional Mobile More Button -->
+    <div class="mobile-more-btn-wrap hidden">
+        <a href="#" onclick="document.getElementById('testimonialsGrid').classList.toggle('expanded-grid'); this.innerText = document.getElementById('testimonialsGrid').classList.contains('expanded-grid') ? 'Show Less' : 'View More'; return false;" class="btn-ghost mobile-more-btn">View More</a>
+    </div>
   </div>
 </section>
 
 <!-- ============ CONNECT US SECTION ============ -->
-<section id="connect" class="py-24 md:py-32 relative overflow-hidden" style="background:radial-gradient(ellipse 70% 60% at 20% 100%, #250d0e 0%, #0A0807 60%);">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 grid md:grid-cols-2 gap-16">
+<section id="connect" class="connect-section relative overflow-hidden">
+  <div class="section-container max-w-7xl mx-auto grid md:grid-cols-2">
     <div>
-      <div class="heading-mark mb-5"></div>
-      <h2 class="font-display text-3xl sm:text-4xl text-[var(--cream)]">Let's tell a story together</h2>
-      <p class="text-[var(--muted)] mt-5 max-w-md leading-relaxed">Have a script, a collaboration or a project in mind? Reach out directly — the fastest way to reach us is WhatsApp.</p>
+      <div class="heading-mark"></div>
+      <h2 class="font-display section-title">Let's tell a story together</h2>
+      <p class="section-paragraph connect-paragraph">Have a script, a collaboration or a project in mind? Reach out directly — the fastest way to reach us is WhatsApp.</p>
 
-      <a id="whatsappBtn" href="https://wa.me/918100392464" target="_blank" rel="noopener" class="btn-whatsapp inline-flex items-center gap-3 mt-8 px-6 py-3.5 rounded-sm text-sm font-medium">
+      <a id="whatsappBtn" href="https://wa.me/918100392464" target="_blank" rel="noopener" class="btn-whatsapp flex items-center">
         Chat on WhatsApp — <span data-footer="phoneDisplay">+91 81003 92464</span>
       </a>
 
-      <div class="mt-10 space-y-3 text-sm text-[var(--muted)]">
-        <div class="flex items-center gap-3"><span data-footer="phoneDisplay2">+91 81003 92464</span></div>
-        <div class="flex items-center gap-3"><span data-footer="email">contact@arssentertainment.com</span></div>
-        <div class="flex items-start gap-3"><span data-footer="address">Tollygunge, Kolkata, West Bengal, India</span></div>
+      <div class="contact-details">
+        <div class="flex items-center contact-item"><span data-footer="phoneDisplay2">+91 81003 92464</span></div>
+        <div class="flex items-center contact-item"><span data-footer="email">contact@arssentertainment.com</span></div>
+        <div class="flex items-start contact-item"><span data-footer="address">Tollygunge, Kolkata, West Bengal, India</span></div>
       </div>
     </div>
 
     <!-- Enquiry Form -->
-    <div class="film-card p-7 sm:p-9 rounded-sm">
-      <h3 class="font-display text-xl text-[var(--cream)] mb-1">Send an enquiry</h3>
-      <p class="text-[var(--muted)] text-sm mb-7">Every message here is saved to our team dashboard.</p>
-      <form id="enquiryForm" class="space-y-5">
-        <div>
-          <label class="text-xs uppercase tracking-wider text-[var(--muted)]">Name</label>
-          <input required name="name" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm" placeholder="Your full name">
+    <div class="form-card film-card rounded-sm">
+      <h3 class="font-display form-title">Send an enquiry</h3>
+      <p class="form-subtitle">Every message here is saved to our team dashboard.</p>
+      <form id="enquiryForm" class="enquiry-form">
+        <div class="form-group">
+          <label class="form-label uppercase">Name</label>
+          <input required name="name" type="text" class="form-input rounded-sm" placeholder="Your full name">
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="text-xs uppercase tracking-wider text-[var(--muted)]">Phone</label>
-            <input required name="phone" type="tel" class="w-full mt-2 px-4 py-3 rounded-sm text-sm" placeholder="Phone number">
+        <div class="form-row grid grid-cols-2">
+          <div class="form-group">
+            <label class="form-label uppercase">Phone</label>
+            <input required name="phone" type="tel" class="form-input rounded-sm" placeholder="Phone number">
           </div>
-          <div>
-            <label class="text-xs uppercase tracking-wider text-[var(--muted)]">Email</label>
-            <input name="email" type="email" class="w-full mt-2 px-4 py-3 rounded-sm text-sm" placeholder="Email (optional)">
+          <div class="form-group">
+            <label class="form-label uppercase">Email</label>
+            <input name="email" type="email" class="form-input rounded-sm" placeholder="Email (optional)">
           </div>
         </div>
-        <div>
-          <label class="text-xs uppercase tracking-wider text-[var(--muted)]">Message</label>
-          <textarea required name="message" rows="4" class="w-full mt-2 px-4 py-3 rounded-sm text-sm" placeholder="Tell us about your project"></textarea>
+        <div class="form-group">
+          <label class="form-label uppercase">Message</label>
+          <textarea required name="message" rows="4" class="form-input rounded-sm" placeholder="Tell us about your project"></textarea>
         </div>
-        <button type="submit" class="btn-primary w-full py-3.5 rounded-sm text-sm tracking-wide">Send Enquiry</button>
+        <button type="submit" class="btn-primary form-submit-btn rounded-sm">Send Enquiry</button>
       </form>
     </div>
   </div>
 </section>
 
 <!-- ============ FOOTER SECTION ============ -->
-<footer class="border-t border-[var(--line)] pt-16 pb-8" style="background:#080605;">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+<footer class="footer-section">
+  <div class="footer-container max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4">
+    
+    <!-- Column 1: Brand & Social Icons -->
     <div>
-      <div class="flex items-center gap-2.5">
-        <img id="footerLogoImg" src="" alt="ARSS Entertainment logo" class="hidden w-9 h-9 object-contain rounded-sm">
-        <span class="font-display text-xl text-[var(--cream)]">ARSS <span style="color:var(--crimson-bright);">ENTERTAINMENT</span></span>
+      <div class="flex items-center footer-logo-wrap">
+        <img id="footerLogoImg" src="ARSS ENTERTAINMENT.png" alt="ARSS Entertainment logo" class="footer-logo-img rounded-sm">
       </div>
-      <p class="text-[var(--muted)] text-sm mt-4 leading-relaxed">Where emotion turns into film.</p>
-      <div id="footerSocial" class="flex gap-4 mt-5 text-xs uppercase tracking-widest text-[var(--muted)]"></div>
-    </div>
-    <div>
-      <div class="text-xs uppercase tracking-widest text-[var(--gold)] mb-4">Navigate</div>
-      <div class="flex flex-col gap-2.5 text-sm text-[var(--muted)]">
-        <a href="#home" class="hover:text-[var(--cream)]">Home</a>
-        <a href="#about" class="hover:text-[var(--cream)]">About</a>
-        <a href="#films" class="hover:text-[var(--cream)]">Films</a>
+      <p class="footer-description">Where emotion turns into film. We craft stories that linger.</p>
+      <div id="footerSocial" class="footer-social flex uppercase">
+        <a href="#" class="social-icon" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.14 1 12 1 12s0 3.86.46 5.58a2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.86 23 12 23 12s0-3.86-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
       </div>
     </div>
+
+    <!-- Column 2: Navigate -->
     <div>
-      <div class="text-xs uppercase tracking-widest text-[var(--gold)] mb-4">Contact</div>
-      <div class="flex flex-col gap-2.5 text-sm text-[var(--muted)]">
-        <span data-footer="phoneDisplay3">+91 81003 92464</span>
-        <span data-footer="email2">contact@arssentertainment.com</span>
+      <div class="footer-heading uppercase">Navigate</div>
+      <div class="flex flex-col footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#films">Films</a>
+        <a href="#team">Team</a>
+        <a href="#gallery">Gallery</a>
       </div>
     </div>
+
+    <!-- Column 3: Legal & Extras -->
     <div>
-      <div class="text-xs uppercase tracking-widest text-[var(--gold)] mb-4">Studio</div>
-      <!-- Changed to Anchor tag for navigation -->
-      <a href="admin.html" class="text-sm text-[var(--muted)] hover:text-[var(--gold)] text-left">Admin Login</a>
+      <div class="footer-heading uppercase">Legal & Info</div>
+      <div class="flex flex-col footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">FAQs</a>
+      </div>
+    </div>
+
+    <!-- Column 4: Contact & Studio -->
+    <div>
+      <div class="footer-heading uppercase">Contact</div>
+      <div class="flex flex-col footer-links">
+        <a href="tel:+918100392464" class="flex items-center contact-icon-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span data-footer="phoneDisplay3">+91 81003 92464</span>
+        </a>
+        <a href="mailto:contact@arssentertainment.com" class="flex items-center contact-icon-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <span data-footer="email2">contact@arssentertainment.com</span>
+        </a>
+        <a href="admin.html" class="footer-admin-link flex items-center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Admin Login
+        </a>
+      </div>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto px-5 md:px-10 mt-14 pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--muted)]">
+  
+  <div class="footer-bottom max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
     <span data-footer="copyright">© 2026 ARSS Entertainment. All rights reserved.</span>
-    <span>Website Created by Israfil Ali</span>
+    <span class="creator-text">Developed by Israfil Ali</span>
   </div>
 </footer>
 
 <!-- Toast Notification -->
 <div id="toast" class="toast fixed bottom-6 right-6 z-[80] opacity-0 translate-y-3 pointer-events-none">
-  <div class="btn-primary px-5 py-3 rounded-sm text-sm shadow-xl" id="toastMsg">Saved</div>
+  <div class="btn-primary toast-msg rounded-sm" id="toastMsg">Saved</div>
 </div>
 
 <script>
-  // TODO: replace with your deployed backend URL (no trailing slash), e.g. "https://arss-api.onrender.com/api"
-  window.API_BASE_URL = "/api"; // same-origin now — frontend and backend are served together
+  window.API_BASE_URL = "/api"; 
 </script>
 <script type="module" src="script.js"></script>
 </body>

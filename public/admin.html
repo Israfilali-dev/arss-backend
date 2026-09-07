@@ -34,23 +34,30 @@
 <div id="adminDashboardSection" class="relative z-10 hidden w-full h-full flex flex-col md:flex-row p-0 md:p-6">
     <div class="w-full h-full flex flex-col md:flex-row overflow-hidden shadow-2xl rounded-sm" style="background:var(--panel);border:1px solid var(--line);">
         
-        <!-- Sidebar Navigation -->
-        <div class="md:w-60 shrink-0 border-b md:border-b-0 md:border-r border-[var(--line)] flex md:flex-col bg-[var(--panel-2)]">
-            <div class="hidden md:block px-6 py-6 border-b border-[var(--line)]">
-                <span class="font-display text-lg text-[var(--cream)]">ARSS <span style="color:var(--crimson-bright);">Admin</span></span>
+       <!-- Sidebar Navigation (CRITICAL: 'flex-col' ensures mobile stacking) -->
+        <div class="md:w-60 shrink-0 border-b md:border-b-0 md:border-r border-[var(--line)] flex flex-col bg-[var(--panel-2)] admin-sidebar-container">
+            
+            <!-- Logo & Text Section (Visible everywhere) -->
+            <div class="flex items-center admin-sidebar-logo-wrap border-b border-[var(--line)]">
+                <img src="ARSS ENTERTAINMENT.png" alt="ARSS Entertainment Logo" class="admin-sidebar-logo">
+                <span class="font-display admin-logo-text text-[var(--cream)]">ARSS <span class="text-crimson-bright">Admin</span></span>
             </div>
-            <div class="flex md:flex-col overflow-x-auto md:overflow-visible w-full">
+            
+            <!-- Tabs Section (Scrollable to prevent cut-off) -->
+            <div class="flex md:flex-col w-full admin-sidebar-tabs-scroll">
                 <button data-tab="dashboard" class="admin-tab active px-6 py-4 text-sm text-left whitespace-nowrap">Enquiries</button>
                 <button data-tab="films" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Films</button>
                 <button data-tab="about" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">About Page</button>
                 <button data-tab="team" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Team</button>
                 <button data-tab="footer" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Footer</button>
                 <button data-tab="social" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Social Links</button>
-                <button data-tab="hero" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Logo & Hero</button>
+                <button data-tab="hero" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Hero Section</button>
                 <button data-tab="services" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Services</button>
                 <button data-tab="gallery" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Gallery</button>
                 <button data-tab="testimonials" class="admin-tab px-6 py-4 text-sm text-left whitespace-nowrap">Testimonials</button>
             </div>
+            
+            <!-- Logout Section -->
             <div class="hidden md:block mt-auto px-6 py-5 border-t border-[var(--line)]">
                 <button id="adminLogout" class="text-sm text-[var(--muted)] hover:text-[var(--crimson-glow)]">Log out</button>
             </div>
@@ -70,10 +77,11 @@
                     <p id="noEnquiries" class="text-[var(--muted)] text-sm hidden">No enquiries yet.</p>
                 </div>
 
-                <!-- FILMS -->
+                <!-- FILMS SECTION -->
                 <div id="tab-films" class="admin-panel-tab hidden">
                     <button id="addFilmBtn" class="btn-primary px-5 py-2.5 rounded-sm text-sm mb-7">+ Add New Film</button>
-                    <div id="filmAdminList" class="grid sm:grid-cols-2 gap-5"></div>
+                    <!-- Tailwind classes removed, added custom CSS class 'admin-films-grid' -->
+                    <div id="filmAdminList" class="admin-films-grid"></div>
                 </div>
 
                 <!-- ABOUT -->
@@ -94,10 +102,11 @@
                     </div>
                 </div>
 
-                <!-- TEAM -->
+                <!-- TEAM SECTION -->
                 <div id="tab-team" class="admin-panel-tab hidden">
                     <button id="addTeamBtn" class="btn-primary px-5 py-2.5 rounded-sm text-sm mb-7">+ Add Team Member</button>
-                    <div id="teamAdminList" class="grid sm:grid-cols-2 gap-5"></div>
+                    <!-- Tailwind classes removed, added custom CSS class 'admin-team-grid' -->
+                    <div id="teamAdminList" class="admin-team-grid"></div>
                 </div>
 
                 <!-- FOOTER -->
@@ -130,29 +139,39 @@
                     </div>
                 </div>
 
-                <!-- HERO & LOGO -->
+                <!-- HERO SECTION -->
                 <div id="tab-hero" class="admin-panel-tab hidden max-w-xl">
-                    <h3 class="font-display text-lg text-[var(--cream)] mb-4">Site Logo</h3>
-                    <input id="logoInput" type="file" accept="image/*" class="text-sm text-[var(--muted)]">
-                    <div id="logoPreview" class="mt-4 w-24 h-24 rounded-sm border border-[var(--line)] bg-[#0F0C0B]"></div>
-                    <button id="saveLogoBtn" class="btn-primary px-6 py-3 rounded-sm text-sm mt-4">Save Logo</button>
-
-                    <hr class="my-8 border-[var(--line)]">
+                    
+                    <!-- HIDDEN: Site Logo (Kept in DOM for JS safety) -->
+                    <div class="hidden">
+                        <h3 class="font-display text-lg text-[var(--cream)] mb-4">Site Logo</h3>
+                        <input id="logoInput" type="file" accept="image/*" class="text-sm text-[var(--muted)]">
+                        <div id="logoPreview" class="mt-4 w-24 h-24 rounded-sm border border-[var(--line)] bg-[#0F0C0B]"></div>
+                        <button id="saveLogoBtn" class="btn-primary px-6 py-3 rounded-sm text-sm mt-4">Save Logo</button>
+                        <hr class="my-8 border-[var(--line)]">
+                    </div>
 
                     <h3 class="font-display text-lg text-[var(--cream)] mb-4">Hero Text</h3>
                     <div class="space-y-5">
-                        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Headline</label>
-                        <input id="heroHeadlineInput" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
-                        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Subheadline</label>
-                        <textarea id="heroSubheadlineInput" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs uppercase tracking-wider text-[var(--muted)]">Headline</label>
+                            <input id="heroHeadlineInput" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm">
+                        </div>
+                        <div>
+                            <label class="text-xs uppercase tracking-wider text-[var(--muted)]">Subheadline</label>
+                            <textarea id="heroSubheadlineInput" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea>
+                        </div>
+                        
+                        <!-- HIDDEN: Primary and Secondary Button inputs (Kept in DOM for JS safety) -->
+                        <div class="grid grid-cols-2 gap-4 hidden">
                             <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Primary Button Text</label><input id="ctaPrimaryTextInput" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
                             <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Primary Button Link</label><input id="ctaPrimaryLinkInput" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-2 gap-4 hidden">
                             <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Secondary Button Text</label><input id="ctaSecondaryTextInput" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
                             <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Secondary Button Link</label><input id="ctaSecondaryLinkInput" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
                         </div>
+
                         <button id="saveHeroTextBtn" class="btn-primary px-6 py-3 rounded-sm text-sm">Save Hero Text</button>
                     </div>
 
@@ -164,18 +183,22 @@
                     <button id="addHeroImageBtn" class="btn-primary px-6 py-3 rounded-sm text-sm ml-3">Add Image</button>
                     <div id="heroImageList" class="grid grid-cols-3 gap-3 mt-5"></div>
                 </div>
+
                 <!-- SERVICES -->
                 <div id="tab-services" class="admin-panel-tab hidden">
                     <button id="addServiceBtn" class="btn-primary px-5 py-2.5 rounded-sm text-sm mb-7">+ Add Service</button>
                     <div id="serviceAdminList" class="grid sm:grid-cols-2 gap-5"></div>
                 </div>
 
-                <!-- GALLERY -->
+                <!-- ============ GALLERY SECTION ============ -->
                 <div id="tab-gallery" class="admin-panel-tab hidden">
+                    <!-- Input controls kept safely as is for JS functionality -->
                     <input id="galleryImageInput" type="file" accept="image/*" class="text-sm text-[var(--muted)]">
                     <input id="galleryCaptionInput" type="text" placeholder="Caption (optional)" class="px-4 py-3 rounded-sm text-sm ml-3">
                     <button id="addGalleryBtn" class="btn-primary px-5 py-2.5 rounded-sm text-sm ml-3">+ Add Image</button>
-                    <div id="galleryAdminList" class="grid sm:grid-cols-3 gap-4 mt-7"></div>
+                    
+                    <!-- Removed inline Tailwind grid classes, added custom CSS class 'admin-gallery-grid' -->
+                    <div id="galleryAdminList" class="admin-gallery-grid mt-7"></div>
                 </div>
 
                 <!-- TESTIMONIALS -->
@@ -188,10 +211,13 @@
     </div>
 </div>
 
-<!-- Add/Edit Item Modal -->
+<!-- ============ ADD/EDIT ITEM MODAL ============ -->
 <div id="itemModal" class="fixed inset-0 z-[95] hidden items-center justify-center bg-black/85 px-5">
-  <div class="film-card w-full max-w-lg p-8 rounded-sm my-auto">
+  
+  <!-- Removed 'my-auto' and 'p-8', added custom 'admin-modal-card' class -->
+  <div class="film-card admin-modal-card w-full max-w-lg rounded-sm">
     <h3 id="itemModalTitle" class="font-display text-xl text-[var(--cream)] mb-6">Add Item</h3>
+    
     <form id="itemForm" class="space-y-4">
       <div id="itemFieldsFilm" class="space-y-4">
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Title</label><input name="title" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
@@ -201,25 +227,31 @@
         </div>
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Description</label><textarea name="description" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
       </div>
+      
       <div id="itemFieldsTeam" class="space-y-4 hidden">
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Name</label><input name="name" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Role</label><input name="role" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Bio</label><textarea name="bio" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
       </div>
+      
       <div id="itemFieldsService" class="space-y-4 hidden">
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Title</label><input name="title" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Description</label><textarea name="description" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
       </div>
+      
       <div id="itemFieldsTestimonial" class="space-y-4 hidden">
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Name</label><input name="name" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Role / Project</label><input name="roleOrProject" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
         <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Quote</label><textarea name="quote" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
       </div>
+      
       <div id="itemPhotoField">
         <label class="text-xs uppercase tracking-wider text-[var(--muted)]">Photo</label>
         <input id="itemImageInput" type="file" accept="image/*" class="w-full mt-2 text-sm text-[var(--muted)]">
         <div id="itemImagePreview" class="mt-3 w-32 aspect-[2/3] rounded-sm border border-[var(--line)]"></div>
       </div>
+      
+      <!-- Buttons will now always be accessible by scrolling -->
       <div class="flex gap-3 pt-2">
         <button type="submit" class="btn-primary flex-1 py-3 rounded-sm text-sm">Save</button>
         <button type="button" id="itemCancelBtn" class="btn-ghost flex-1 py-3 rounded-sm text-sm">Cancel</button>
@@ -228,6 +260,54 @@
   </div>
 </div>
 
+<!-- ============ ADD/EDIT ITEM MODAL ============ -->
+<div id="itemModal" class="fixed inset-0 z-[95] hidden items-center justify-center bg-black/85 px-5">
+  <div class="film-card admin-modal-card w-full max-w-lg rounded-sm">
+    <h3 id="itemModalTitle" class="font-display text-xl text-[var(--cream)] mb-6">Add Item</h3>
+    
+    <form id="itemForm" class="space-y-4">
+      <div id="itemFieldsFilm" class="space-y-4">
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Title</label><input name="title" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Category</label><input name="category" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
+          <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Year</label><input name="year" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
+        </div>
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Description</label><textarea name="description" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
+      </div>
+      
+      <div id="itemFieldsTeam" class="space-y-4 hidden">
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Name</label><input name="name" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Role</label><input name="role" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Bio</label><textarea name="bio" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
+      </div>
+      
+      <div id="itemFieldsService" class="space-y-4 hidden">
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Title</label><input name="title" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Description</label><textarea name="description" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
+      </div>
+      
+      <div id="itemFieldsTestimonial" class="space-y-4 hidden">
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Name</label><input name="name" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Role / Project</label><input name="roleOrProject" type="text" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></div>
+        <div><label class="text-xs uppercase tracking-wider text-[var(--muted)]">Quote</label><textarea name="quote" rows="3" class="w-full mt-2 px-4 py-3 rounded-sm text-sm"></textarea></div>
+      </div>
+      
+      <div id="itemPhotoField">
+        <label class="text-xs uppercase tracking-wider text-[var(--muted)]">Photo</label>
+        <input id="itemImageInput" type="file" accept="image/*" class="w-full mt-2 text-sm text-[var(--muted)]">
+        <div id="itemImagePreview" class="mt-3 w-32 aspect-[2/3] rounded-sm border border-[var(--line)]"></div>
+      </div>
+      
+      <!-- Buttons are safely inside the form and modal card now -->
+      <div class="flex gap-3 pt-2">
+        <button type="submit" class="btn-primary flex-1 py-3 rounded-sm text-sm">Save</button>
+        <button type="button" id="itemCancelBtn" class="btn-ghost flex-1 py-3 rounded-sm text-sm">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ TOAST NOTIFICATION ============ -->
 <div id="toast" class="toast fixed bottom-6 right-6 z-[80] opacity-0 translate-y-3 pointer-events-none">
   <div class="btn-primary px-5 py-3 rounded-sm text-sm shadow-xl" id="toastMsg">Saved</div>
 </div>
